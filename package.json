@@ -5,19 +5,19 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build:docs": "jsdoc simulator/src/* -c conf.json -t ./node_modules/better-docs",
+    "build:docs": "node init && jsdoc simulator/src/* -c conf.json -t ./node_modules/better-docs",
     "watch:doc-src": "npx nodemon --exec 'npm run build:docs' --watch simulator/src/",
     "watch:doc-output": "npx livereload out",
     "watch:docs": "npm run watch:doc-output & npm run watch:doc-src",
     "lint": "eslint ./simulator",
     "postinstall": "opencollective-postinstall || true",
     "prepare": "husky .",
-    "build": "yarn build:js && yarn build:css",
-    "build:js": "node esbuild.config.js",
-    "build:css": "yarn build:css:compile && yarn build:css:fonts",
-    "build:css:compile": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/mailer.scss:./app/assets/builds/mailer.css --no-source-map --load-path=node_modules",
-    "build:css:fonts": "cp ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf ./app/assets/builds/",
-    "build-vue-simulator": "cd cv-frontend-vue && VITE_BASE=/simulator-v0/ npm run build && cd .."
+    "build": "node init && yarn build:js && yarn build:css",
+    "build:js": "node init && node esbuild.config.js",
+    "build:css": "node init && yarn build:css:compile && yarn build:css:fonts",
+    "build:css:compile": "node init && sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/mailer.scss:./app/assets/builds/mailer.css --no-source-map --load-path=node_modules",
+    "build:css:fonts": "node init && cp ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2 ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf ./app/assets/builds/",
+    "build-vue-simulator": "node init && cd cv-frontend-vue && VITE_BASE=/simulator-v0/ npm run build && cd .."
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.7",
